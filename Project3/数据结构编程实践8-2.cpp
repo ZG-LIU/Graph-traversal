@@ -420,102 +420,115 @@ void DestroyAdj(AdjGragh*& G)
     printf("销毁成功\n");
 }
 
+
 //主函数
 
 int main()
 {
-kai: mune();
-    AdjGragh* G = nullptr;
-    MatGraph g;
-    int A[MAXV][MAXV], x, chu;
-    int n, e;
-    scanf_s("%d", &x);
-    switch (x)
-    {
-    case 1:
-        readfile1(shu1());
-        lu(A, shu1());
-        n = shu1(), e = shu1();
-        break;
-    case 2:
-        readfile2(shu2());
-        lu(A, shu2());
-        n = shu2(), e = shu2();
-        break;
-    case 3:
-        readfile3(shu3());
-        lu(A, shu3());
-        n = shu3(), e = shu3();
-        break;
-    case 4:
-        printf("输入顶点数：");
-        scanf_s("%d", &n);
-        e = n;
-        for (int i1 = 0; i1 < n; i1++)
+    int flags = 1;
+    while (flags) {
         {
-            for (int i2 = 0; i2 < n; i2++)
+            mune();
+            AdjGragh* G = nullptr;
+            MatGraph g;
+            int A[MAXV][MAXV], x, chu;
+            int n, e;
+            scanf_s("%d", &x);
+            switch (x)
             {
-                printf("请输入第%d行第%d列的元素：", i1, i2);
-                cin >> s[i1][i2];
+            case 1:
+                readfile1(shu1());
+                lu(A, shu1());
+                n = shu1(), e = shu1();
+                break;
+            case 2:
+                readfile2(shu2());
+                lu(A, shu2());
+                n = shu2(), e = shu2();
+                break;
+            case 3:
+                readfile3(shu3());
+                lu(A, shu3());
+                n = shu3(), e = shu3();
+                break;
+            case 4:
+                printf("输入顶点数：");
+                scanf_s("%d", &n);
+                e = n;
+                for (int i1 = 0; i1 < n; i1++)
+                {
+                    for (int i2 = 0; i2 < n; i2++)
+                    {
+                        printf("请输入第%d行第%d列的元素：", i1, i2);
+                        cin >> s[i1][i2];
+                    }
+                }
+                for (int i1 = 0; i1 < n; i1++)
+                {
+                    for (int i2 = 0; i2 < n; i2++)
+                    {
+                        printf("%c ", s[i1][i2]);
+                    }
+                    printf("\n");
+                }
+                lu(A, n);
+            default:
+                n = 0;
+                e = 0;
+                break;
             }
-        }
-        for (int i1 = 0; i1 < n; i1++)
-        {
-            for (int i2 = 0; i2 < n; i2++)
-            {
-                printf("%c ", s[i1][i2]);
-            }
+
+            CreatrMat(g, A, n, e);
+            printf("图G的邻接表：\n");
+            MatToList(g, G);
+            DispAdj(G);
             printf("\n");
+            printf("图G的邻接矩阵：\n");
+            DispMat(g);
+            printf("\n");
+            printf("从顶点0开始的DFS(递归算法):\n");
+            DFS(g, 0); printf("\n");
+            memset(visited, 0, sizeof(visited));
+            printf("从顶点0开始的DFS(栈函数，非递归算法,邻接矩阵的存储方式):\n");
+            DFS1(g, 0);
+            printf("\n");
+            memset(visited, 0, sizeof(visited));
+            printf("从顶点0开始的DFS(栈函数，非递归算法,邻接表的存储方式):\n");
+            DFS2(G, 0);
+            printf("\n");
+            memset(visited, 0, sizeof(visited));
+            printf("从顶点0开始的BFS(邻接矩阵的存储方式):\n");
+            BFS(g, 0);
+            printf("\n");
+            memset(visited, 0, sizeof(visited));
+            printf("从顶点0开始的BFS(邻接表的存储方式):\n");
+            BFS1(G, 0);
+            printf("\n");
+            printf("销毁邻接表\n");
+            DestroyAdj(G);
+            int flags1 = 1;
+            while (flags1)
+            {
+                printf("输入‘0’退出，输入‘1’重新选择案例:");
+                scanf_s("%d", &chu);
+                switch (chu)
+                {
+                case 0:
+                    flags1 = 0;
+                    flags = 0;
+                    printf("感谢你的使用:)\n\n");
+                    printf("@author 刘娟\n");
+                    break;
+                case 1:
+                    flags1 = 0;
+                   
+                }
+                    
+            }
+            
+            
         }
-        lu(A, n);
-    default:
-        n = 0;
-        e = 0;
-        break;
+
     }
    
-    CreatrMat(g, A, n, e);
-    printf("图G的邻接表：\n");
-    MatToList(g, G);
-    DispAdj(G);
-    printf("\n");
-    printf("图G的邻接矩阵：\n");
-    DispMat(g);
-    printf("\n");
-    printf("从顶点0开始的DFS(递归算法):\n");
-    DFS(g, 0); printf("\n");
-    memset(visited, 0, sizeof(visited));
-    printf("从顶点0开始的DFS(栈函数，非递归算法,邻接矩阵的存储方式):\n");
-    DFS1(g, 0);
-    printf("\n");
-    memset(visited, 0, sizeof(visited));
-    printf("从顶点0开始的DFS(栈函数，非递归算法,邻接表的存储方式):\n");
-    DFS2(G, 0);
-    printf("\n");
-    memset(visited, 0, sizeof(visited));
-    printf("从顶点0开始的BFS(邻接矩阵的存储方式):\n");
-    BFS(g, 0);
-    printf("\n");
-    memset(visited, 0, sizeof(visited));
-    printf("从顶点0开始的BFS(邻接表的存储方式):\n");
-    BFS1(G, 0);
-    printf("\n");
-    printf("销毁邻接表\n");
-    DestroyAdj(G);
-    while (1)
-    {
-        printf("输入‘0’退出，输入‘1’重新选择案例:");
-        scanf_s("%d", &chu);
-        switch (chu)
-        {
-        case 1:
-            goto kai;
-            break;
-        case 2:
-            break;
-        }
-        break;
-    }
-   
-    return 1;
 }
