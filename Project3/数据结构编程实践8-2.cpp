@@ -127,15 +127,16 @@ void readfile3(int shu)//读取文件
 }
 void lu(int A[MAXV][MAXV], int shu)
 {
-    for (int i = 0; i < shu; i++) {
-        for (int j = 0; j < shu; j++)
-        {
-            if (s[i][j] == 'F')
-                A[i][j] = INF;
-            else
-                A[i][j] = s[i][j] - 48;
+        for (int i = 0; i < shu; i++) {
+            for (int j = 0; j < shu; j++)
+            {
+                if (s[i][j] == 'F')
+                    A[i][j] = INF;
+                else
+                    A[i][j] = s[i][j] - 48;
+            }
         }
-    }
+    
 }
 //邻接矩阵声明
 typedef struct
